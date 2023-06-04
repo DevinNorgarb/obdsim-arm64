@@ -1,0 +1,1 @@
+/usr/bin/cc -rdynamic CMakeFiles/obdboxwhisker.dir/boxwhisker.c.o -o /home/kali/obdgpslogger/bin/obdboxwhisker   -L/home/kali/obdgpslogger/build/libs/sqlite3  -L/home/kali/obdgpslogger/build/src/obdinfo  ../../libs/sqlite3/libcksqlite.a -lpthread -ldl ../obdinfo/libckobdinfo.a -lm 

@@ -1,0 +1,1 @@
+/usr/bin/cc -rdynamic CMakeFiles/obdlogrepair.dir/obdrepairmain.c.o -o /home/kali/obdgpslogger/bin/obdlogrepair   -L/home/kali/obdgpslogger/build/src/repair  -L/home/kali/obdgpslogger/build/libs/sqlite3  libckobdrepair.a ../../libs/sqlite3/libcksqlite.a -lpthread -ldl 

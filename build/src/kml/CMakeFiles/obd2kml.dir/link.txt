@@ -1,0 +1,1 @@
+/usr/bin/cc -rdynamic CMakeFiles/obd2kml.dir/heightandcolor.c.o CMakeFiles/obd2kml.dir/justgps.c.o CMakeFiles/obd2kml.dir/obdgpskml.c.o CMakeFiles/obd2kml.dir/singleheight.c.o -o /home/kali/obdgpslogger/bin/obd2kml   -L/home/kali/obdgpslogger/build/libs/sqlite3  ../../libs/sqlite3/libcksqlite.a -lpthread -ldl -lm 

@@ -1,0 +1,31 @@
+Determining if the getaddrinfo exist failed with the following output:
+Change Dir: /home/kali/obdgpslogger/build/CMakeFiles/CMakeScratch/TryCompile-gsnOYI
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_856f3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_856f3.dir/build.make CMakeFiles/cmTC_856f3.dir/build
+gmake[1]: Entering directory '/home/kali/obdgpslogger/build/CMakeFiles/CMakeScratch/TryCompile-gsnOYI'
+Building C object CMakeFiles/cmTC_856f3.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_856f3.dir/CheckSymbolExists.c.o -c /home/kali/obdgpslogger/build/CMakeFiles/CMakeScratch/TryCompile-gsnOYI/CheckSymbolExists.c
+/home/kali/obdgpslogger/build/CMakeFiles/CMakeScratch/TryCompile-gsnOYI/CheckSymbolExists.c: In function ‘main’:
+/home/kali/obdgpslogger/build/CMakeFiles/CMakeScratch/TryCompile-gsnOYI/CheckSymbolExists.c:8:19: error: ‘getaddrinfo’ undeclared (first use in this function)
+    8 |   return ((int*)(&getaddrinfo))[argc];
+      |                   ^~~~~~~~~~~
+/home/kali/obdgpslogger/build/CMakeFiles/CMakeScratch/TryCompile-gsnOYI/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_856f3.dir/build.make:78: CMakeFiles/cmTC_856f3.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/home/kali/obdgpslogger/build/CMakeFiles/CMakeScratch/TryCompile-gsnOYI'
+gmake: *** [Makefile:127: cmTC_856f3/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/socket.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getaddrinfo
+  return ((int*)(&getaddrinfo))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}

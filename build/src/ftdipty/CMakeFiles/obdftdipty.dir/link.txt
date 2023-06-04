@@ -1,0 +1,1 @@
+/usr/bin/cc -rdynamic CMakeFiles/obdftdipty.dir/ftdipty.c.o -o /home/kali/obdgpslogger/bin/obdftdipty  /usr/lib/aarch64-linux-gnu/./libftdi.so ../conf/libckobdconfigfile.a ../obdinfo/libckobdinfo.a 

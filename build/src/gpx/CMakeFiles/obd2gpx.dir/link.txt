@@ -1,0 +1,1 @@
+/usr/bin/cc -rdynamic CMakeFiles/obd2gpx.dir/obd2gpx.c.o -o /home/kali/obdgpslogger/bin/obd2gpx   -L/home/kali/obdgpslogger/build/libs/sqlite3  ../../libs/sqlite3/libcksqlite.a -lpthread -ldl 

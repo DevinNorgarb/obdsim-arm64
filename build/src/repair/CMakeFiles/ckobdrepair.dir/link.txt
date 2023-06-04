@@ -1,0 +1,2 @@
+/usr/bin/ar qc libckobdrepair.a CMakeFiles/ckobdrepair.dir/obdrepair.c.o
+/usr/bin/ranlib libckobdrepair.a

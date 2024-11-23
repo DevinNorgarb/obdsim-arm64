@@ -24,7 +24,10 @@ along with obdgpslogger.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef HAVE_GPSD
 
 #include <gps.h>
+#include <stdlib.h>
 #include <time.h>
+
+static double timespec_to_double(const struct timespec *ts);
 
 struct gps_data_t *opengps(char *server, char *port) {
 	struct gps_data_t *g = malloc(sizeof(struct gps_data_t));

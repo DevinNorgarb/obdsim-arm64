@@ -31,34 +31,47 @@ static double timespec_to_double(const struct timespec *ts);
 
 struct gps_data_t *opengps(char *server, char *port) {
 	struct gps_data_t *g = malloc(sizeof(struct gps_data_t));
+	if (NULL == g) {
+		return NULL;
+	}
+
 	if (gps_open(server, port, g) != 0) {
 		free(g);
 		return NULL;
 	}
 
-	gps_stream(g, WATCH_ENABLE|WATCH_NEWSTYLE, NULL);
+	if (gps_stream(g, WATCH_ENABLE|WATCH_NEWSTYLE, NULL) == -1) {
+		gps_close(g);
+		free(g);
+		return NULL;
+	}
 	return g;
 }
 
 void closegps(struct gps_data_t *g) {
-	gps_close(g);
+	if (g != NULL) {
+		gps_close(g);
+		free(g);
+	}
 }
 
 int getgpsposition(struct gps_data_t *g, double *lat, double *lon, double *alt, double *speed, double *course, double *gpstime) {
-	if(NULL == g) return -1;
+	if (NULL == g) return -1;
 
-	if (gps_read(g, NULL, 0) == -1) {
+	if (gps_read(g, NULL, 1000000) == -1) {  // 1 second timeout
 		return -1;
 	}
 
 	if (g->fix.mode >= MODE_2D) {
-		if(NULL != lat) *lat = g->fix.latitude;
-		if(NULL != lon) *lon = g->fix.longitude;
-		if(NULL != alt && g->fix.mode == MODE_3D) *alt = g->fix.altitude;
-		if(NULL != speed) *speed = g->fix.speed;
-		if(NULL != course) *course = g->fix.track;
-		if(NULL != gpstime) *gpstime = timespec_to_double(&g->fix.time);
-		return 0;
+		if (NULL != lat) *lat = g->fix.latitude;
+		if (NULL != lon) *lon = g->fix.longitude;
+		if (NULL != alt) {
+			*alt = (g->fix.mode == MODE_3D) ? g->fix.altitude : 0.0;
+		}
+		if (NULL != speed) *speed = g->fix.speed;
+		if (NULL != course) *course = g->fix.track;
+		if (NULL != gpstime) *gpstime = timespec_to_double(&g->fix.time);
+		return (g->fix.mode == MODE_3D) ? 1 : 0;
 	}
 
 	return -1;

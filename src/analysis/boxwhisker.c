@@ -9,7 +9,7 @@ the Free Software Foundation, either version 2 of the License, or
 
 obdgpslogger is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
@@ -21,6 +21,10 @@ along with obdgpslogger.  If not, see <http://www.gnu.org/licenses/>.
 #include <math.h>
 #include <string.h>
 #include "sqlite3.h"
+#include <unistd.h>     // For write(), close()
+#include <fcntl.h>      // For fsync()
+#include <string.h>     // For strlen()
+#include <stdio.h>      // For fwrite()
 
 #include "obdservicecommands.h"
 
@@ -145,7 +149,10 @@ int main(int argc, char *argv[]) {
 			quartiles[0], quartiles[1],
 			quartiles[2], quartiles[3],
 			quartiles[4]);
-		write(gnuplot_datfd, dataline, strlen(dataline));
+		if (write(gnuplot_datfd, dataline, strlen(dataline)) < 0) {
+			fprintf(stderr, "Error writing to data file\n");
+			return 1;
+		}
 
 		sqlite3_finalize(stmt);
 
@@ -190,13 +197,16 @@ int main(int argc, char *argv[]) {
 			quartiles[0], quartiles[1],
 			quartiles[2], quartiles[3],
 			quartiles[4]);
-		write(gnuplot_datfd, dataline, strlen(dataline));
+		if (write(gnuplot_datfd, dataline, strlen(dataline)) < 0) {
+			fprintf(stderr, "Error writing to data file\n");
+			return 1;
+		}
 
 		sqlite3_finalize(stmt);
 
 		fsync(gnuplot_datfd);
 		close(gnuplot_datfd);
-		
+
 		maxVal += 0.05 * (maxVal-minVal);
 		minVal -= 0.05 * (maxVal-minVal);
 
@@ -228,4 +238,3 @@ void printhelp(const char *argv0) {
 	printf("Usage: %s <database>\n"
 		"New adventures in box and whisker plots, using gnuplot\n", argv0);
 }
-

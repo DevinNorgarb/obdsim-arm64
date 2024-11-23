@@ -1,1 +1,0 @@
-/usr/bin/cc -rdynamic CMakeFiles/obdtripcompare.dir/tripcompare.c.o CMakeFiles/obdtripcompare.dir/examinetrips.c.o CMakeFiles/obdtripcompare.dir/analysistables.c.o -o /home/kali/obdgpslogger/bin/obdtripcompare   -L/home/kali/obdgpslogger/build/libs/sqlite3  ../../libs/sqlite3/libcksqlite.a -lpthread -ldl -lm 

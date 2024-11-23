@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  obdgpslogger:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    privileged: true
+    # On Mac, we can't use host network mode as it's not supported
+    ports:
+      - "2947:2947"
+      - "1883:1883"
+    volumes:
+      - ./data:/data
+      # For Mac, we need to use the special docker.for.mac.host.internal hostname
+      - /var/run/dbus:/var/run/dbus
+    environment:
+      - OBD_DEFAULT_DATABASE=/data/obdgpslogger.db
+      # For Bluetooth on Mac, typically the device shows up as /dev/tty.OBDII
+      - OBD_DEFAULT_SERIALPORT=/dev/tty.OBDII
+      # For GPS on Mac, typically shows up as /dev/tty.usbserial
+      - OBD_DEFAULT_GPSPORT=/dev/tty.usbserial
+      # Add this to allow connection to host machine
+      - DOCKER_HOST=docker.for.mac.host.internal
+    restart: unless-stopped
+    # Device mapping is different on Mac
+    devices:
+      - "/dev/tty.OBDII:/dev/tty.OBDII"
+      - "/dev/tty.usbserial:/dev/tty.usbserial"
+
+  obdgpslogger-dev:
+    extends: obdgpslogger
+    volumes:
+      - .:/app  # Mount source code for development
+      - ./data:/data
+      - /dev:/dev
+      - /var/run/dbus:/var/run/dbus
+      - /var/run/sdp:/var/run/sdp
+    command: /bin/bash  # Override to get a shell
+    stdin_open: true
+    tty: true

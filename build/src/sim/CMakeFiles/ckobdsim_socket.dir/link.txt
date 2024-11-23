@@ -1,2 +1,0 @@
-/usr/bin/ar qc libckobdsim_socket.a CMakeFiles/ckobdsim_socket.dir/generators/socket/gen_socket.c.o
-/usr/bin/ranlib libckobdsim_socket.a

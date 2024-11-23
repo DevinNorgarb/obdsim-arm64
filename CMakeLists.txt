@@ -212,4 +212,15 @@ ENDIF(APPLE)
 
 INCLUDE(CPack)
 
+if(APPLE)
+    add_definitions(-D_DARWIN_C_SOURCE)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-implicit-function-declaration")
+endif()
 
+# Enable Bluetooth and Socket support
+SET(OBD_SIM_DISABLE_BLUEZ OFF CACHE BOOL "Disable bluetooth support in obdsim" FORCE)
+SET(OBD_SIM_DISABLE_SOCKET OFF CACHE BOOL "Disable socket support in obdsim" FORCE)
+
+# If you need to force enable them
+ADD_DEFINITIONS(-DHAVE_BLUETOOTH)
+ADD_DEFINITIONS(-DHAVE_SOCKET)

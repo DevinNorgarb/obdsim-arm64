@@ -1,1 +1,0 @@
-/usr/bin/cc -rdynamic CMakeFiles/testobdconfig.dir/testobdconfig.c.o -o /home/kali/obdgpslogger/bin/testobdconfig  libckobdconfigfile.a ../obdinfo/libckobdinfo.a 

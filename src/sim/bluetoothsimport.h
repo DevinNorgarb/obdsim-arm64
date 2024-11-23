@@ -9,7 +9,7 @@ the Free Software Foundation, either version 2 of the License, or
 
 obdgpslogger is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
@@ -24,6 +24,10 @@ along with obdgpslogger.  If not, see <http://www.gnu.org/licenses/>.
 #define __BLUETOOTHSIMPORT_H
 
 #ifdef HAVE_BLUETOOTH
+
+#ifndef BTPROTO_RFCOMM
+#define BTPROTO_RFCOMM 3
+#endif
 
 #include <sys/socket.h>
 #include <termios.h>
@@ -62,4 +66,3 @@ private:
 #endif //  HAVE_BLUETOOTH
 
 #endif //__BLUETOOTHSIMPORT_H
-

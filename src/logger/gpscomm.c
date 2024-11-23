@@ -61,4 +61,8 @@ int getgpsposition(struct gps_data_t *g, double *lat, double *lon, double *alt, 
 	return -1;
 }
 
+static double timespec_to_double(const struct timespec *ts) {
+    return ts->tv_sec + ts->tv_nsec * 1e-9;
+}
+
 #endif //HAVE_GPSD
